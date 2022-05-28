@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "strict": false,
-    "noImplicitAny": true,
+    "strict": true,  // 엄격한 타입 검사 여부
+    "noImplicitAny": true,  // 타입이 정의되지 않은 것들을 암묵적으로 any로 취급할지 안 할지
     "allowJs": true,
     "jsx": "preserve",
     "importHelpers": true,

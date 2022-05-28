@@ -25,14 +25,15 @@ export default new VueRouter({
 			) {
 				bus.$emit('on:progress');
 
-				try {
-					await store.dispatch('FETCH_LIST', routeTo.name);
-					next();
-				} catch (err) {
-					console.log(err);
-					// 다음 페이지로 넘어가지 못했을 때, 이동할 에러 페이지를 명시하는 것이 좋다.
-					// next('/error');
-				}
+				// try {
+				// 	await store.dispatch('FETCH_LIST', routeTo.name);
+				// 	next();
+				// } catch (err) {
+				// 	console.log(err);
+				// 	// 다음 페이지로 넘어가지 못했을 때, 이동할 에러 페이지를 명시하는 것이 좋다.
+				// 	// next('/error');
+				// }
+				next();
 			},
 		},
 		{
