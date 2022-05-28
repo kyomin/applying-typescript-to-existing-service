@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list-item></list-item>
+    <ListItem :items="newsItems" />
   </div>
 </template>
 
@@ -12,15 +12,20 @@ export default {
   components: {
     ListItem,
   },
+  data() {
+    return {
+      newsItems: [],
+    };
+  },
   methods: {
     async fetchNewsItems() {
       const response = await fetchNews();
-      console.log(response.data);
+      this.newsItems = response.data;
     },
   },
   created() {
     this.fetchNewsItems();
-  }
+  },
 };
 </script>
 
