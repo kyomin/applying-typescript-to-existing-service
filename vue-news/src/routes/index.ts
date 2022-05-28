@@ -18,23 +18,32 @@ export default new VueRouter({
 			path: '/news',
 			name: 'news',
 			component: createListView('NewsView'),
-			beforeEnter(
+			async beforeEnter(
 				routeTo: Route,
 				routeFrom: Route,
 				next: (to?: RawLocation | false | ((vm: Vue) => any) | void) => void
-			) {				
+			) {
 				bus.$emit('on:progress');
-				store
-					.dispatch('FETCH_LIST', routeTo.name)
-					.then(() => next())
-					.catch(() => new Error('failed to fetch news items'));
+
+				try {
+					await store.dispatch('FETCH_LIST', routeTo.name);
+					next();
+				} catch (err) {
+					console.log(err);
+					// 다음 페이지로 넘어가지 못했을 때, 이동할 에러 페이지를 명시하는 것이 좋다.
+					// next('/error');
+				}
 			},
 		},
 		{
 			path: '/ask',
 			name: 'ask',
 			component: createListView('AskView'),
-			beforeEnter(routeTo, routeFrom, next) {
+			beforeEnter(
+				routeTo: Route,
+				routeFrom: Route,
+				next: (to?: RawLocation | false | ((vm: Vue) => any) | void) => void
+			) {
 				bus.$emit('on:progress');
 				store
 					.dispatch('FETCH_LIST', routeTo.name)
@@ -46,7 +55,11 @@ export default new VueRouter({
 			path: '/jobs',
 			name: 'jobs',
 			component: createListView('JobsView'),
-			beforeEnter(routeTo, routeFrom, next) {
+			beforeEnter(
+				routeTo: Route,
+				routeFrom: Route,
+				next: (to?: RawLocation | false | ((vm: Vue) => any) | void) => void
+			) {
 				bus.$emit('on:progress');
 				store
 					.dispatch('FETCH_LIST', routeTo.name)
@@ -57,7 +70,11 @@ export default new VueRouter({
 		{
 			path: '/item/:id',
 			component: ItemView,
-			beforeEnter(routeTo, routeFrom, next) {
+			beforeEnter(
+				routeTo: Route,
+				routeFrom: Route,
+				next: (to?: RawLocation | false | ((vm: Vue) => any) | void) => void
+			) {
 				bus.$emit('on:progress');
 				const itemId = routeTo.params.id;
 				store
@@ -69,7 +86,11 @@ export default new VueRouter({
 		{
 			path: '/user/:id',
 			component: UserView,
-			beforeEnter(routeTo, routeFrom, next) {
+			beforeEnter(
+				routeTo: Route,
+				routeFrom: Route,
+				next: (to?: RawLocation | false | ((vm: Vue) => any) | void) => void
+			) {
 				bus.$emit('on:progress');
 				const itemId = routeTo.params.id;
 				store
