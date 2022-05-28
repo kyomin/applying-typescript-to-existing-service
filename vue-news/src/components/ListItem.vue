@@ -28,7 +28,7 @@
           }}</router-link>
         </small>
         <small v-if="news.time_ago" class="link-text">
-          {{ news.time_ago }}
+          {{ timeAgo(news) }}
         </small>
       </div>
     </li>
@@ -37,13 +37,20 @@
 
 <script lang="ts">
 import Vue, { PropType } from "vue";
-import { NewsItem } from '../api/index';
+import { NewsItem } from "../api/index";
 
 export default Vue.extend({
   props: {
     items: {
       type: Array as PropType<NewsItem[]>,
       required: true,
+    },
+  },
+  methods: {
+    // NewsItem.time_ago가 string임을 알기 때문에 안전하게 concat 함수를 호출할 수 있다.
+    // 만일 오타나 없는 함수를 호출하면 힌트가 뜬다.
+    timeAgo(news: NewsItem): string {
+      return news.time_ago.concat(", 2022");
     },
   },
 });
