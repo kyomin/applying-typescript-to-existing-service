@@ -33,6 +33,10 @@ export default Vue.extend({
     },
   },
   created() {
+    // 라이브러리 내부적으로 제네릭으로 any로 받기 때문에 스토어의 타입 추론이 되지 않는다.
+    // Vue.$store: Store<any>
+    // 추후 해결 방법을 살펴본다.
+    this.$store.state.news
     bus.$on("on:progress", this.onProgress);
     bus.$on("off:progress", this.offProgress);
   },
