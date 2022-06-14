@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
 import { RootState, state } from './state';
+import { mutations } from './mutations';
 // import getters from './getters.js';
 // import mutations from './mutations.js';
 // import actions from './actions.js';
@@ -9,6 +10,7 @@ Vue.use(Vuex);
 
 const store: StoreOptions<RootState> = {
 	state,
+	mutations,
 };
 
 export default new Vuex.Store(store);
