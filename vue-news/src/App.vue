@@ -34,7 +34,6 @@ export default Vue.extend({
     },
   },
   created() {
-    // this.$stroe.commit(MutationTypes.SET_NEWS, 10); --> 타입 에러
     bus.$on("on:progress", this.onProgress);
     bus.$on("off:progress", this.offProgress);
   },
